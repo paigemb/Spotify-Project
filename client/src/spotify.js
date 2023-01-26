@@ -230,9 +230,9 @@ export const getNewAlbumReleases = (limit = 20) => {
     const monthWord = monthMap.get(monthNum);
     axios.post(`/users/${user_id}/playlists`, {name: `${monthWord}'s Top Tracks`}).then(function (response) {
        var playlist_id = response.data.id
-        for (track in tracks) {addTopTracks(playlist_id, track)}
+       // for (track in tracks) {addTopTracks(playlist_id, track)}
       }).catch(function (error) {
         console.log(error.toJSON());
       });
-      getTopTracks(short_term)
+    //  getTopTracks(short_term)
   }
