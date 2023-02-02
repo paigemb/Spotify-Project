@@ -204,42 +204,18 @@ export const getNewAlbumReleases = (limit = 20) => {
   };
 
 
-  /* export const createTopTracksPlaylist = () => {
-    console.log('creating');
-    axios('https://api.spotify.com/v1/users/paige9098/playlists', {
-    method: 'POST',
-    headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
-        'Authorization' : 'Bearer ' + getAccessToken(),
-    },
-    data: JSON.stringify({name: 'test'})})
-    console.log('created')
-
-  }
-   */
-
   const addTopTracks = (playlist_id, track) => {
-   
     let trackList = track.join('%2C');
     const newList = trackList.replace(/:/g, '%3A')
-
-  
     try {
     axios.post(`/playlists/${playlist_id}/tracks?uris=${newList}`)
-  
     }
     catch {
       console.log('yikes');
     }
-
-
   }
 
   export const createTopTracksPlaylist = (user_id, tracks) => {
-    
-    
-
-
     //get the current month to name the playlist
     const date = new Date();
     const monthNum = date.getMonth();
@@ -256,5 +232,4 @@ export const getNewAlbumReleases = (limit = 20) => {
         }
        addTopTracks(playlist_id, tracklist)
       }).catch(console.log('oh no')) 
-
   }
