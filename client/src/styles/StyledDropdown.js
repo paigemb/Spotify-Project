@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from "styled-components/macro";
 
 const StyledDropdown = styled.div`
   position: absolute;
@@ -11,7 +11,7 @@ const StyledDropdown = styled.div`
   }
 
   &:after {
-    content: '';
+    content: "";
     top: 15px;
     right: var(--spacing-sm);
     position: absolute;
@@ -25,13 +25,15 @@ const StyledDropdown = styled.div`
   select {
     -webkit-appearance: none;
     appearance: none;
-    background-color: ${props => props.active ? 'rgba(255,255,255,0.1)' : 'transparent'};
+    background-color: ${(props) =>
+      props.active ? "rgba(255,255,255,0.1)" : "transparent"};
     color: white;
     border: 0;
     border-radius: var(--border-radius-subtle);
     font-size: var(--fz-sm);
     font-family: inherit;
-    padding: var(--spacing-xs) var(--spacing-xl) var(--spacing-xs) var(--spacing-sm);
+    padding: var(--spacing-xs) var(--spacing-xl) var(--spacing-xs)
+      var(--spacing-sm);
   }
 `;
 

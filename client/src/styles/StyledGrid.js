@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from "styled-components/macro";
 
 const StyledGrid = styled.ul`
   list-style: none;
@@ -60,7 +60,7 @@ const StyledGrid = styled.ul`
       height: 100%;
       object-fit: cover;
       background-color: var(--dark-grey);
-      border-radius: ${props => props.type === 'artist' ? '50%' : '2px'};
+      border-radius: ${(props) => (props.type === "artist" ? "50%" : "2px")};
     }
   }
 

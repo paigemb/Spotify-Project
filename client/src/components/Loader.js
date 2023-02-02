@@ -1,4 +1,4 @@
-import styled, { keyframes } from 'styled-components/macro';
+import styled, { keyframes } from "styled-components/macro";
 
 const dance = keyframes`
   from {
@@ -43,7 +43,7 @@ const StyledBar = styled.div`
   animation-direction: alternate;
   animation-timing-function: linear;
   animation-iteration-count: infinite;
-  animation-delay: ${props => props.delay || '0ms'};
+  animation-delay: ${(props) => props.delay || "0ms"};
 `;
 
 const Loader = () => (
