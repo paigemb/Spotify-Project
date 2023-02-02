@@ -9,3 +9,6 @@ How to run:
 
 - npm start
 - When prompted, login with your Spotify credentials
+
+Prettier: 
+- npx prettier --write .
