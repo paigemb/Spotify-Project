@@ -1,6 +1,6 @@
-import { createGlobalStyle } from 'styled-components/macro';
-import fonts from './fonts/fonts'
-import variables from './variables';
+import { createGlobalStyle } from "styled-components/macro";
+import fonts from "./fonts/fonts";
+import variables from "./variables";
 
 const GlobalStyle = createGlobalStyle`
 ${fonts};  

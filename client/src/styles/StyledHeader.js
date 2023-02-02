@@ -1,10 +1,10 @@
-import styled from 'styled-components/macro';
+import styled from "styled-components/macro";
 
 const StyledHeader = styled.header`
   display: flex;
   align-items: flex-end;
   position: relative;
-  background: linear-gradient(transparent, rgba(0,0,0,0.5));
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.5));
   background-color: var(--grey);
   height: 30vh;
   max-height: 500px;
@@ -15,12 +15,12 @@ const StyledHeader = styled.header`
   }
 
   &:after {
-    content: '';
+    content: "";
     display: block;
     width: 100%;
     height: 20vh;
     background-color: var(--grey);
-    background-image: linear-gradient(rgba(0,0,0,0.6), var(--black));
+    background-image: linear-gradient(rgba(0, 0, 0, 0.6), var(--black));
     position: absolute;
     top: 100%;
     z-index: -1;
@@ -46,7 +46,7 @@ const StyledHeader = styled.header`
     margin-right: var(--spacing-lg);
     box-shadow: 0 4px 60px rgb(0 0 0 / 50%);
     background-color: var(--dark-grey);
-    border-radius: ${props => props.type === 'user' ? '50%' : '0'};
+    border-radius: ${(props) => (props.type === "user" ? "50%" : "0")};
 
     @media (min-width: 768px) {
       margin-right: var(--spacing-xl);
@@ -83,7 +83,7 @@ const StyledHeader = styled.header`
       align-items: center;
 
       &:not(:last-of-type)::after {
-        content: '•';
+        content: "•";
         display: block;
         margin: 0 var(--spacing-xs);
         color: var(--light-grey);

@@ -1,5 +1,5 @@
-import { formatDuration } from '../utils';
-import { StyledTrackList } from '../styles';
+import { formatDuration } from "../utils";
+import { StyledTrackList } from "../styles";
 
 const TrackList = ({ tracks }) => (
   <>
@@ -21,7 +21,8 @@ const TrackList = ({ tracks }) => (
                 <div className="track__item__artist overflow-ellipsis">
                   {track.artists.map((artist, i) => (
                     <span key={i}>
-                      {artist.name}{i !== track.artists.length - 1 && ', '}
+                      {artist.name}
+                      {i !== track.artists.length - 1 && ", "}
                     </span>
                   ))}
                 </div>

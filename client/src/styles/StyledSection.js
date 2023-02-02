@@ -1,4 +1,4 @@
-import styled from 'styled-components/macro';
+import styled from "styled-components/macro";
 
 const StyledSection = styled.section`
   &:first-of-type {
@@ -37,7 +37,7 @@ const StyledSection = styled.section`
     color: var(--light-grey);
 
     &::after {
-      content: '/';
+      content: "/";
       display: block;
       margin: 0 var(--spacing-sm);
     }

@@ -1,4 +1,4 @@
-import { css } from 'styled-components/macro';
+import { css } from "styled-components/macro";
 
 const variables = css`
   :root {
@@ -8,9 +8,10 @@ const variables = css`
     --grey: #535353;
     --light-grey: #b3b3b3;
     --white: #ffffff;
-    --green: #1DB954;
+    --green: #1db954;
 
-    --font: 'Circular Std', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+    --font: "Circular Std", -apple-system, BlinkMacSystemFont, system-ui,
+      sans-serif;
 
     --fz-xxs: 12px;
     --fz-xs: 13px;

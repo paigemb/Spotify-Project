@@ -1,24 +1,31 @@
-import { useState, useEffect } from 'react';
-import { accessToken, logout, getCurrentUserProfile } from './spotify'
-import { catchErrors } from './utils';
-import { GlobalStyle } from './styles';
-import styled from 'styled-components/macro';
-import { Login, Profile, TopArtists, TopTracks, Playlists, Playlist } from './pages';
+import { useState, useEffect } from "react";
+import { accessToken, logout, getCurrentUserProfile } from "./spotify";
+import { catchErrors } from "./utils";
+import { GlobalStyle } from "./styles";
+import styled from "styled-components/macro";
+import {
+  Login,
+  Profile,
+  TopArtists,
+  TopTracks,
+  Playlists,
+  Playlist,
+} from "./pages";
 import {
   BrowserRouter as Router,
   Switch,
   Route,
   useLocation,
-} from 'react-router-dom'
+} from "react-router-dom";
 
-import './App.css';
+import "./App.css";
 
 const StyledLogoutButton = styled.button`
   position: absolute;
   top: var(--spacing-sm);
   right: var(--spacing-md);
   padding: var(--spacing-xs) var(--spacing-sm);
-  background-color: rgba(0,0,0,.7);
+  background-color: rgba(0, 0, 0, 0.7);
   color: var(--white);
   font-size: var(--fz-sm);
   font-weight: 700;
@@ -39,7 +46,6 @@ function ScrollToTop() {
 
   return null;
 }
-
 
 function App() {
   const [token, setToken] = useState(null);
