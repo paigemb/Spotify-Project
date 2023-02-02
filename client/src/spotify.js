@@ -219,21 +219,43 @@ export const getNewAlbumReleases = (limit = 20) => {
    */
 
   const addTopTracks = (playlist_id, track) => {
-    console.log('adding')
-    axios.post(`/playlists/${playlist_id}/tracks`, {uris: `${track}`})
-    console.log('added')
+    //console.log('adding')
+    //console.log(track.replace('spotify:track:', ''))
+    //get rid of ':' %2C is comma
+   
+     
+    //while(track.find(':') != -1) {track = track.replace(':','%3A')}
+    //console.log(trackList)
+   
+    let trackList = track.join('%2C');
+    const newList = trackList.replace(/:/g, '%3A')
+    console.log(newList)
+    
+    //while(trackList.find(':') != -1) {trackList = trackList.replace(':','%3A')}
+    try {
+      //axios.post(`/playlists/${playlist_id}/tracks`, {"uris": [`${track.join(',')}`]})
+    axios.post(`/playlists/${playlist_id}/tracks?uris=${newList}`)
+      //console.log([`${track.join(',')}`])
+      
+    }
+    catch {
+      console.log('yikes');
+    }
+
+    //axios.post(`/playlists/${playlist_id}/tracks`, {uris: "spotify:track:7w5AOd6HrDIHewHfpABEss"})
+    
+    
+    //console.log('added')
   }
 
   export const createTopTracksPlaylist = (user_id, tracks) => {
-    // I DO NOT KNOW WHY BUT THIS WHILE LOOP CRASHED MY COMPUTER
-   // let i = 0;
-   // while (i < 20) {
-     // console.log(tracks[i].uri)
-     // i++;
- //   }
-    //get rid of ':'
-   /* trackList = '%2C'.join(tracks)
-    while(trackList.find(':') != -1) {trackList = trackList.replace(':','%3A')}
+    
+    
+    //get rid of ':' %2C is comma
+    //trackList = '%2C'.join(tracks)
+    //while(tracks.find(':') != -1) {tracks = tracks.replace(':','%3A')}
+  
+   // console.log(tracks)
 
     //get the current month to name the playlist
     const date = new Date();
@@ -243,9 +265,17 @@ export const getNewAlbumReleases = (limit = 20) => {
     //create the new playlist and then add in the user's top songs
     axios.post(`/users/${user_id}/playlists`, {name: `${monthWord}'s Top Tracks`}).then(function (response) {
        var playlist_id = response.data.id
-        for (let track in tracks) {addTopTracks(playlist_id, track)}
-      }).catch(function (error) {
-        console.log(error.toJSON());
-      }); */
+       let i = 0;
+       //axios.post(`/playlists/${playlist_id}/tracks`, {uris: ["spotify:track:7w5AOd6HrDIHewHfpABEss"]})
+       let tracklist = new Array();
+       while (i < 20) {
+          //console.log(tracks[i].uri)
+         
+          tracklist.push(tracks[i].uri)
+         // addTopTracks(playlist_id, tracks[i].uri);
+          i++;
+        }
+       addTopTracks(playlist_id, tracklist)
+      }).catch(console.log('oh no')) 
     //  getTopTracks();
   }
