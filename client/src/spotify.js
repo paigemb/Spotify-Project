@@ -219,20 +219,42 @@ export const getNewAlbumReleases = (limit = 20) => {
    */
 
   const addTopTracks = (playlist_id, track) => {
-    console.log('adding')
-    axios.post(`/playlists/${playlist_id}/tracks`, {uris: `${track}`})
-    console.log('added')
+   
+    let trackList = track.join('%2C');
+    const newList = trackList.replace(/:/g, '%3A')
+
+  
+    try {
+    axios.post(`/playlists/${playlist_id}/tracks?uris=${newList}`)
+  
+    }
+    catch {
+      console.log('yikes');
+    }
+
+
   }
 
   export const createTopTracksPlaylist = (user_id, tracks) => {
+    
+    
+
+
+    //get the current month to name the playlist
     const date = new Date();
     const monthNum = date.getMonth();
     const monthWord = monthMap.get(monthNum);
+
+    //create the new playlist and then add in the user's top songs
     axios.post(`/users/${user_id}/playlists`, {name: `${monthWord}'s Top Tracks`}).then(function (response) {
        var playlist_id = response.data.id
-        for (track in tracks) {addTopTracks(playlist_id, track)}
-      }).catch(function (error) {
-        console.log(error.toJSON());
-      });
-      getTopTracks(short_term)
+       let i = 0;
+       let tracklist = new Array();
+       while (i < 20) {
+          tracklist.push(tracks[i].uri)
+          i++;
+        }
+       addTopTracks(playlist_id, tracklist)
+      }).catch(console.log('oh no')) 
+
   }

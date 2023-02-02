@@ -22,7 +22,7 @@ const Profile = () => {
     const fetchData = async () => {
       const userProfile = await getCurrentUserProfile();
       setProfile(userProfile.data);
-      //setProfileID(userProfile.data.id);
+      setProfileID(userProfile.data.id);
 
       const userPlaylists = await getCurrentUserPlaylists();
       setPlaylists(userPlaylists.data);
@@ -41,8 +41,6 @@ const Profile = () => {
 
     catchErrors(fetchData());
   }, []);
-
- 
     
   return (
     <>
@@ -80,7 +78,7 @@ const Profile = () => {
                   <TrackList tracks={topTracks.items.slice(0, 10)} />
                  
                 </SectionWrapper>
-                <button onClick= {() => createTopTracksPlaylist(profile.id, topTracks.items.uri.slice(0,20))}> Create Playlist</button>
+                <button onClick= {() => createTopTracksPlaylist(profile.id, topTracks.items)}> Create Playlist</button>
                 <SectionWrapper title="Public Playlists" seeAllLink="/playlists">
                   <PlaylistsGrid playlists={playlists.items.slice(0, 10)} />
                 </SectionWrapper>
