@@ -9,10 +9,10 @@ import { TrackList, SectionWrapper, Loader } from "../components";
 import { StyledHeader, StyledDropdown } from "../styles";
 
 /*
-* create an array of audio feature objects to correspond to each track in the tracks array
-* merge the two arrays together using id property
-* sort the resulting array by audio feature
-*/
+ * create an array of audio feature objects to correspond to each track in the tracks array
+ * merge the two arrays together using id property
+ * sort the resulting array by audio feature
+ */
 
 const Playlist = () => {
   const { id } = useParams(); //returns key/value pairs of URL parameters; get ID from url
@@ -72,7 +72,7 @@ const Playlist = () => {
       return null;
     }
     //map over tracks array
-    return tracks.map(({ track }) => { 
+    return tracks.map(({ track }) => {
       const trackToAdd = track;
       //find corresponding audio features object from the audioFeatures array using track's id
       if (!track.audio_features) {

@@ -1,8 +1,8 @@
-/* 
-* Buttons to adjust time range and display data
-* activeRange: string w/value of short, medium, or long
-* setActiveRange: update state variable w/time range
-*/
+/*
+ * Buttons to adjust time range and display data
+ * activeRange: string w/value of short, medium, or long
+ * setActiveRange: update state variable w/time range
+ */
 
 import { StyledRangeButtons } from "../styles";
 

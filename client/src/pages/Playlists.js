@@ -6,12 +6,12 @@ import { getCurrentUserPlaylists, createTopTracksPlaylist } from "../spotify";
 import { catchErrors } from "../utils";
 import { SectionWrapper, PlaylistsGrid, Loader } from "../components";
 
-/* 
-* Spotify API can return a maximum of 20 playlists at one time
-* Wrap JSON response in a paging object containing a next property containing the URL of the next page of items
-* ex API call returns = next: "https://api.spotify.com/v1/users/username/playlists?offest=10....etc"
-* need to do a second GET call to next's url 
-*/
+/*
+ * Spotify API can return a maximum of 20 playlists at one time
+ * Wrap JSON response in a paging object containing a next property containing the URL of the next page of items
+ * ex API call returns = next: "https://api.spotify.com/v1/users/username/playlists?offest=10....etc"
+ * need to do a second GET call to next's url
+ */
 const Playlists = () => {
   const [playlistsData, setPlaylistsData] = useState(null);
   const [playlists, setPlaylists] = useState(null);
