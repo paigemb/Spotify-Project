@@ -1,3 +1,5 @@
+/* Styling for Artist/Playlists Grid */
+
 import styled from "styled-components/macro";
 
 const StyledGrid = styled.ul`

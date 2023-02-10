@@ -1,3 +1,5 @@
+/* Loading animation to display whenever the app is retrieving data from API and rendering */
+
 import styled, { keyframes } from "styled-components/macro";
 
 const dance = keyframes`
@@ -8,7 +10,7 @@ const dance = keyframes`
     height: 100%;
   }
 `;
-
+//small component, don't really need to separate styling
 const StyledLoader = styled.div`
   display: flex;
   align-items: center;

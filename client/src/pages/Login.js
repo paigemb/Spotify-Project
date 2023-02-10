@@ -1,5 +1,8 @@
+/* Page prompting users to log in with their Spotify account */
+
 import styled from "styled-components/macro";
 
+// main tag that centers login button with flexbox
 const StyledLoginContainer = styled.main`
   display: flex;
   flex-direction: column;
@@ -8,6 +11,7 @@ const StyledLoginContainer = styled.main`
   height: 100vh;
 `;
 
+//a makes it an anchor link
 const StyledLoginButton = styled.a`
   display: inline-block;
   background-color: var(--green);

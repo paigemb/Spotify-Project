@@ -1,3 +1,5 @@
+/* Styling for SectionWrapper.js */
+
 import styled from "styled-components/macro";
 
 const StyledSection = styled.section`

@@ -1,5 +1,7 @@
+/* Page for displaying user's most listened to artists */
+
 import { useState, useEffect } from "react";
-import { getTopArtists, getArtistAlbums } from "../spotify";
+import { getTopArtists } from "../spotify";
 import { catchErrors } from "../utils";
 import {
   ArtistsGrid,
@@ -14,7 +16,7 @@ const TopArtists = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await getTopArtists(`${activeRange}_term`);
+      const { data } = await getTopArtists(`${activeRange}_term`); //allows to change time range
       setTopArtists(data);
     };
     catchErrors(fetchData());

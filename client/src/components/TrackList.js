@@ -1,4 +1,6 @@
-import { formatDuration } from "../utils";
+/* Component to display songs, maps over array of songs and renders */
+
+import { formatDuration } from "../utils"; // convert from milliseconds to minutes & seconds
 import { StyledTrackList } from "../styles";
 
 const TrackList = ({ tracks }) => (

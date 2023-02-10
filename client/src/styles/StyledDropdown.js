@@ -1,3 +1,5 @@
+/* Styling for the dropdown selection for sorting tracks on Playlist.js */
+
 import styled from "styled-components/macro";
 
 const StyledDropdown = styled.div`

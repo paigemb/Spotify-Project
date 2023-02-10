@@ -3,6 +3,8 @@ import { accessToken, logout } from "./spotify";
 import { GlobalStyle } from "./styles";
 import { ScrollToTop } from "./utils";
 import styled from "styled-components/macro";
+
+// Styling & Logic for individual pages
 import {
   Login,
   Profile,
@@ -20,7 +22,7 @@ import {
   useLocation,
 } from "react-router-dom";
 
-import "./App.css";
+import "./App.css"; //delete ? 
 
 const StyledLogoutButton = styled.button`
   position: absolute;
