@@ -1,5 +1,8 @@
-import styled from "styled-components/macro";
+/* Styling for header on Profile.js and for playlist pages*/
 
+import styled from "styled-components/macro";
+//for img.header__img border-radius checks if headers is for a profile before making it a circle
+//so the header can be reused for playlist pages w/o user profile pic
 const StyledHeader = styled.header`
   display: flex;
   align-items: flex-end;

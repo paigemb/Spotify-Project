@@ -1,3 +1,4 @@
+/* Easy export of reusable components */
 export { default as ArtistsGrid } from "./ArtistsGrid";
 export { default as Loader } from "./Loader";
 export { default as PlaylistsGrid } from "./PlaylistsGrid";

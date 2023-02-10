@@ -1,3 +1,5 @@
+/* Styling for component listing songs */
+
 import styled from "styled-components/macro";
 
 const StyledTrackList = styled.ul`

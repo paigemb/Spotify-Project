@@ -1,4 +1,7 @@
-import { Link } from "react-router-dom";
+/* Component for grid of public playlists displayed on profile page */
+//not no StyledGrid type specified, no circular framing
+
+import { Link } from "react-router-dom"; //wraps each playlist item into a link to individual playlist page
 import { StyledGrid } from "../styles";
 
 const PlaylistsGrid = ({ playlists }) => (

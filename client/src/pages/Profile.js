@@ -1,3 +1,5 @@
+/* Home page user is navigated to after successfully logging in */
+
 import { useState, useEffect } from "react";
 import { catchErrors } from "../utils";
 import {
@@ -5,7 +7,6 @@ import {
   getCurrentUserPlaylists,
   getTopArtists,
   getTopTracks,
-  getNewAlbumReleases,
   createTopTracksPlaylist,
 } from "../spotify";
 import { StyledHeader } from "../styles";
@@ -19,14 +20,14 @@ import {
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
-  const [profileID, setProfileID] = useState(null);
+  const [profileID, setProfileID] = useState(null); //i think we can delete
   const [playlists, setPlaylists] = useState(null);
   const [topArtists, setTopArtists] = useState(null);
   const [topTracks, setTopTracks] = useState(null);
-  const [newAlbums, setNewAlbums] = useState(null);
 
+  //set state variables
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async () => { //using async / await since functions return promise
       const userProfile = await getCurrentUserProfile();
       setProfile(userProfile.data);
       setProfileID(userProfile.data.id);
@@ -39,14 +40,12 @@ const Profile = () => {
 
       const userTopTracks = await getTopTracks();
       setTopTracks(userTopTracks.data);
-
-      const userNewAlbums = await getNewAlbumReleases();
-      setNewAlbums(userNewAlbums.data);
     };
 
-    catchErrors(fetchData());
+    catchErrors(fetchData()); //use helper function to wrap in try/catch
   }, []);
 
+  //.slice(0,10) returns top 10 of list
   return (
     <>
       {profile && (

@@ -1,3 +1,5 @@
+/* Component to wrap sections and ensure consistent styling*/
+
 import { Link } from "react-router-dom";
 import { StyledSection } from "../styles";
 

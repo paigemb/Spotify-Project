@@ -1,5 +1,8 @@
-import { css } from "styled-components/macro";
+/* Home for CSS variables  */
 
+import { css } from "styled-components/macro";
+// styled-components.com/docs/api#css
+// css helper function generates CSS from template literal with interpolations
 const variables = css`
   :root {
     --black: #121212;

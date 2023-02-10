@@ -1,3 +1,4 @@
+/* Import Spotify-esque font styles */
 import { css } from "styled-components/macro";
 
 import "./PlusJakartaSans-Regular.woff";

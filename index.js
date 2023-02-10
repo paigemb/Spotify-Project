@@ -1,22 +1,31 @@
 //index.js app entry point
+
+// allows access to secret env variables 
 require("dotenv").config();
-//import Express module
-const express = require("express");
-const { restart } = require("nodemon");
-//instatiate Express app
-const app = express();
-const port = 8888;
+
+/* Express module */
+const express = require("express"); //import
+const app = express(); //instatiate
+const port = 8888; //listen
 
 const axios = require("axios");
 
+//parse and stringify query strings
+const querystring = require("querystring");
+
+const { restart } = require("nodemon");
+
+
+// securely store environment variables 
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
 
-const querystring = require("querystring");
 
 /**
  * Generates a random string containing numbers and letters
+ * Added protection against things like cross-site request forgery
+ * https://cheatsheetseries.owasp.org/cheatsheets/Cross-Site_Request_Forgery_Prevention_Cheat_Sheet.html#synchronizer-token-pattern
  * @param  {number} length The length of the string
  * @return {string} The generated string
  */
@@ -32,13 +41,14 @@ const generateRandomString = (length) => {
 
 const stateKey = "spotify_auth_state";
 
-//request authorization from Spotify Accounts Service
+/* ROUTE HANDLERS */
+
+// request authorization from Spotify Accounts Service
 app.get("/login", (req, res) => {
-  //protects against things like cross-site request forgery
   const state = generateRandomString(16);
   res.cookie(stateKey, state);
 
-  //access user's account and email
+  // list of needed scopes from Spotify API
   const scope = [
     "user-read-private",
     "user-read-email",
@@ -49,53 +59,61 @@ app.get("/login", (req, res) => {
 
   const queryParams = querystring.stringify({
     client_id: CLIENT_ID,
-    response_type: "code",
-    redirect_uri: REDIRECT_URI,
-    state: state,
+    response_type: "code", // authorization code to be exchanged for access token
+    redirect_uri: REDIRECT_URI, //redirect user after authorization
+    state: state, //bookkeeping value passed back unchanged in redirect URI, OAuth security
     scope: scope,
   });
 
+  // hit Spotify Accounts Service endpoint, redirects to Login Page
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
+
+// exchanges the authorization code for access token !!
+// pass tokens to React app via query params 
+
 app.get("/callback", (req, res) => {
-  const code = req.query.code || null;
+    //req.query -> from Express, object containing a property for each query string param (i.e code=abc, return abc)
+    const code = req.query.code || null; // store authorization code
 
   axios({
     method: "post",
     url: "https://accounts.spotify.com/api/token",
-    data: querystring.stringify({
+    data: querystring.stringify({ //format required body params
       grant_type: "authorization_code",
-      code: code,
+      code: code, // authorization code
       redirect_uri: REDIRECT_URI,
     }),
     headers: {
-      "content-type": "application/x-www-form-urlencoded",
+      "content-type": "application/x-www-form-urlencoded", //body of HTTP Post req sent as query string in simple text/ASCII format
       Authorization: `Basic ${new Buffer.from(
         `${CLIENT_ID}:${CLIENT_SECRET}`
-      ).toString("base64")}`,
+      ).toString("base64")}`, //Authorization header should be base 64 encoded string
     },
   })
+    //handle resolving the promise axios() returns
     .then((response) => {
-      if (response.status === 200) {
+      if (response.status === 200) { //return stringified data
         const { access_token, refresh_token, expires_in } = response.data;
 
         const queryParams = querystring.stringify({
           access_token,
-          refresh_token,
-          expires_in,
+          refresh_token, //retrieve another access token
+          expires_in, //number of seconds that access_token is valid
         });
-
+        //res.redirect() Express method to send user to localhost url
         res.redirect(`http://localhost:3000/?${queryParams}`);
       } else {
         res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
       }
     })
-    .catch((error) => {
+    .catch((error) => { //do not return stringified data :(
       res.send(error);
     });
 });
 
+// refresh token so user doesn't have to log in again
 app.get("/refresh_token", (req, res) => {
   const { refresh_token } = req.query;
 

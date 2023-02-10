@@ -1,8 +1,10 @@
 import { useState, useEffect } from "react";
-import { accessToken, logout, getCurrentUserProfile } from "./spotify";
-import { catchErrors } from "./utils";
+import { accessToken, logout } from "./spotify";
 import { GlobalStyle } from "./styles";
+import { ScrollToTop } from "./utils";
 import styled from "styled-components/macro";
+
+// Styling & Logic for individual pages
 import {
   Login,
   Profile,
@@ -11,14 +13,16 @@ import {
   Playlists,
   Playlist,
 } from "./pages";
+
+// imports to handling page routing
 import {
   BrowserRouter as Router,
-  Switch,
+  Switch, //switch will find the first element with matching path and ignore the rest -> list more specific routes first
   Route,
   useLocation,
 } from "react-router-dom";
 
-import "./App.css";
+import "./App.css"; //delete ? 
 
 const StyledLogoutButton = styled.button`
   position: absolute;
@@ -35,21 +39,12 @@ const StyledLogoutButton = styled.button`
     right: var(--spacing-lg);
   }
 `;
-// Scroll to top of page when changing routes
-// https://reactrouter.com/web/guides/scroll-restoration/scroll-to-top
-function ScrollToTop() {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-}
 
 function App() {
-  const [token, setToken] = useState(null);
+  //token variable for conditionally rendering the logged-in state
+  const [token, setToken] = useState(null); //useState keeps track of token
 
+  // store access token
   useEffect(() => {
     setToken(accessToken);
   }, []);

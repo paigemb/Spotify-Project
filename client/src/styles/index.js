@@ -1,3 +1,4 @@
+/* Reference spot to make importing styles cleaner */
 export { default as GlobalStyle } from "./GlobalStyle";
 export { default as StyledDropdown } from "./StyledDropdown";
 export { default as StyledGrid } from "./StyledGrid";

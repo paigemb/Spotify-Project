@@ -1,3 +1,6 @@
+/* Component that maps over an array of artists and renders an item for each one in a list */
+// note StyledGrid type to enable the circular framing
+
 import { StyledGrid } from "../styles";
 
 const ArtistsGrid = ({ artists }) => (

@@ -1,3 +1,5 @@
+/* Page to display an individual playlist  */
+
 import { useState, useEffect, useMemo } from "react";
 import { useParams } from "react-router-dom";
 import axios from "axios";
@@ -6,33 +8,40 @@ import { getPlaylistById, getAudioFeaturesForTracks } from "../spotify";
 import { TrackList, SectionWrapper, Loader } from "../components";
 import { StyledHeader, StyledDropdown } from "../styles";
 
+/*
+* create an array of audio feature objects to correspond to each track in the tracks array
+* merge the two arrays together using id property
+* sort the resulting array by audio feature
+*/
+
 const Playlist = () => {
-  const { id } = useParams();
+  const { id } = useParams(); //returns key/value pairs of URL parameters; get ID from url
   const [playlist, setPlaylist] = useState(null);
   const [tracksData, setTracksData] = useState(null);
   const [tracks, setTracks] = useState(null);
   const [audioFeatures, setAudioFeatures] = useState(null);
   const [sortValue, setSortValue] = useState("");
-  const sortOptions = ["danceability", "tempo", "energy"];
+  const sortOptions = ["danceability", "tempo", "energy"]; //potentially change/add
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await getPlaylistById(id);
+      const { data } = await getPlaylistById(id); //pass ID to get specific playlist
       setPlaylist(data);
       setTracksData(data.tracks);
     };
 
     catchErrors(fetchData());
-  }, [id]);
+  }, [id]); //id is a dependency, don't need to run it until we know what the id is
 
-  // When tracksData updates, compile arrays of tracks and audioFeatures
+  // when tracksData updates, compile arrays of tracks and audioFeatures
   useEffect(() => {
     if (!tracksData) {
       return;
     }
 
-    // When tracksData updates, check if there are more tracks to fetch
+    // when tracksData updates, check if there are more tracks to fetch
     // then update the state variable
+    // similar logic as on Playlists.js
     const fetchMoreData = async () => {
       if (tracksData.next) {
         const { data } = await axios.get(tracksData.next);
@@ -42,7 +51,8 @@ const Playlist = () => {
     setTracks((tracks) => [...(tracks ? tracks : []), ...tracksData.items]);
     catchErrors(fetchMoreData());
 
-    // Also update the audioFeatures state variable using the track IDs
+    // also update the audioFeatures state variable using the track IDs
+    // compile array of audio features for each track
     const fetchAudioFeatures = async () => {
       const ids = tracksData.items.map(({ track }) => track.id).join(",");
       const { data } = await getAudioFeaturesForTracks(ids);
@@ -54,15 +64,17 @@ const Playlist = () => {
     catchErrors(fetchAudioFeatures());
   }, [tracksData]);
 
-  // Map over tracks and add audio_features property to each track
+  //useMemo() for performance, only need tracksWithAdioFeatures to be computed when we have
+  //both tracks and audioFeatures arrays
+  //reactjs.org/docs/hook-reference.html#usememo
   const tracksWithAudioFeatures = useMemo(() => {
     if (!tracks || !audioFeatures) {
       return null;
     }
-
-    return tracks.map(({ track }) => {
+    //map over tracks array
+    return tracks.map(({ track }) => { 
       const trackToAdd = track;
-
+      //find corresponding audio features object from the audioFeatures array using track's id
       if (!track.audio_features) {
         const audioFeaturesObj = audioFeatures.find((item) => {
           if (!item || !track) {
@@ -70,7 +82,7 @@ const Playlist = () => {
           }
           return item.id === track.id;
         });
-
+        //assign audio features object to the track's audio_features property
         trackToAdd["audio_features"] = audioFeaturesObj;
       }
 
@@ -78,7 +90,8 @@ const Playlist = () => {
     });
   }, [tracks, audioFeatures]);
 
-  // Sort tracks by audio feature to be used in template
+  // memoized array that sorts tracksWithAudioFeatures array according to currently selected sortValue
+  // everytime sortValue changes, <TrackList> rerenders with sorted array
   const sortedTracks = useMemo(() => {
     if (!tracksWithAudioFeatures) {
       return null;

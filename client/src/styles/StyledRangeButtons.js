@@ -1,3 +1,5 @@
+/* Styling for buttons to change time range, displays list of buttons w/green background to active button */
+
 import styled from "styled-components/macro";
 
 const StyledRangeButtons = styled.ul`
