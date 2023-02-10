@@ -71,6 +71,8 @@ app.get("/login", (req, res) => {
 
 
 // exchanges the authorization code for access token !!
+// pass tokens to React app via query params 
+
 app.get("/callback", (req, res) => {
     //req.query -> from Express, object containing a property for each query string param (i.e code=abc, return abc)
     const code = req.query.code || null; // store authorization code
@@ -100,7 +102,7 @@ app.get("/callback", (req, res) => {
           refresh_token, //retrieve another access token
           expires_in, //number of seconds that access_token is valid
         });
-
+        //res.redirect() Express method to send user to localhost url
         res.redirect(`http://localhost:3000/?${queryParams}`);
       } else {
         res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);

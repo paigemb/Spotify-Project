@@ -18,6 +18,8 @@ Project Description:
         - need to specify scopes, see https://developer.spotify.com/documentation/general/guides/authorization/scopes/ for list
     - dotenv: loads environment variables from env file into an object w/user environment
     - Axios library: provides easy API and works both client-side/browser and server-side/Express app
+    - Create React App (CRA): handles configuration with setting up app, run npx create-react-app directory_name
+    - Concurrently: runs multiple npm commands at the same time, used to simplify project setup
     
     
 - https://www.newline.co/courses/build-a-spotify-connected-app
@@ -26,6 +28,9 @@ How to run:
 
 - npm start
 - When prompted, login with your Spotify credentials
+
+Dependency installation: (postinstall script in package.json)
+- npm install
 
 Prettier: 
 - npx prettier --write .
