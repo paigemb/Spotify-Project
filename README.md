@@ -20,7 +20,7 @@ Project Description:
     - Axios library: provides easy API and works both client-side/browser and server-side/Express app
     - Create React App (CRA): handles configuration with setting up app, run npx create-react-app directory_name
     - Concurrently: runs multiple npm commands at the same time, used to simplify project setup
-    
+    - local storage: mechanism of Web Storage API, stores key/value pairs in browser
     
 - https://www.newline.co/courses/build-a-spotify-connected-app
 

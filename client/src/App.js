@@ -48,7 +48,8 @@ function ScrollToTop() {
 }
 
 function App() {
-  const [token, setToken] = useState(null);
+  //token variable for conditionally rendering the logged-in state
+  const [token, setToken] = useState(null); //useState keeps track of token
 
   // store access token
   useEffect(() => {
