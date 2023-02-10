@@ -4,7 +4,8 @@
  * @returns {function}
  */
 export const catchErrors = (fn) => {
-  return function (...args) { ///...args -> rest parameter (allows for indefinite # arguments )
+  return function (...args) {
+    ///...args -> rest parameter (allows for indefinite # arguments )
     return fn(...args).catch((err) => {
       console.error(err);
     });
@@ -37,16 +38,3 @@ export const monthMap = new Map([
   [10, "November"],
   [11, "December"],
 ]);
-
-// Scroll to top of page when changing routes
-// https://reactrouter.com/web/guides/scroll-restoration/scroll-to-top
-export function ScrollToTop() {
-    const { pathname } = useLocation();
-  
-    useEffect(() => {
-      window.scrollTo(0, 0);
-    }, [pathname]);
-  
-    return null;
-  }
-  

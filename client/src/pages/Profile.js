@@ -27,7 +27,8 @@ const Profile = () => {
 
   //set state variables
   useEffect(() => {
-    const fetchData = async () => { //using async / await since functions return promise
+    const fetchData = async () => {
+      //using async / await since functions return promise
       const userProfile = await getCurrentUserProfile();
       setProfile(userProfile.data);
       setProfileID(userProfile.data.id);

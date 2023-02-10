@@ -6,7 +6,7 @@ import { monthMap } from "./utils";
 /***********************************************************************************************************/
 /* Web Storage API local storage */
 // stores data after browser closes
-// store access and refresh token from query params in local storage 
+// store access and refresh token from query params in local storage
 // when API request is made, check if token is valid/not expired
 // if yes, use. if not use refresh token and store in local storage w/updated timestamp
 // note: local storage stores everything as strings --> must also check for undefined
@@ -37,14 +37,13 @@ const LOCALSTORAGE_VALUES = {
  * @returns {void}
  */
 export const logout = () => {
-    // loop through local storage and remove all
-    for (const property in LOCALSTORAGE_KEYS) {
-      window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
-    }
-    // reload to home page w/login button
-    window.location = window.location.origin;
-  };
-  
+  // loop through local storage and remove all
+  for (const property in LOCALSTORAGE_KEYS) {
+    window.localStorage.removeItem(LOCALSTORAGE_KEYS[property]);
+  }
+  // reload to home page w/login button
+  window.location = window.location.origin;
+};
 
 /**
  * Checks if the amount of time that has elapsed between the timestamp in local storage
@@ -59,7 +58,6 @@ const hasTokenExpired = () => {
   const millisecondsElapsed = Date.now() - Number(timestamp);
   return millisecondsElapsed / 1000 > Number(expireTime);
 };
-
 
 /**
  * Use the refresh token in localStorage to hit the /refresh_token endpoint
@@ -157,7 +155,6 @@ export const accessToken = getAccessToken();
 axios.defaults.baseURL = "https://api.spotify.com/v1";
 axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`; //access token is OAuth access token from local storage
 axios.defaults.headers["Content-Type"] = "application/json";
-
 
 /**
  * Get Current User's Profile

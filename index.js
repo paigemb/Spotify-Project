@@ -1,6 +1,6 @@
 //index.js app entry point
 
-// allows access to secret env variables 
+// allows access to secret env variables
 require("dotenv").config();
 
 /* Express module */
@@ -15,12 +15,10 @@ const querystring = require("querystring");
 
 const { restart } = require("nodemon");
 
-
-// securely store environment variables 
+// securely store environment variables
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
-
 
 /**
  * Generates a random string containing numbers and letters
@@ -69,18 +67,18 @@ app.get("/login", (req, res) => {
   res.redirect(`https://accounts.spotify.com/authorize?${queryParams}`);
 });
 
-
 // exchanges the authorization code for access token !!
-// pass tokens to React app via query params 
+// pass tokens to React app via query params
 
 app.get("/callback", (req, res) => {
-    //req.query -> from Express, object containing a property for each query string param (i.e code=abc, return abc)
-    const code = req.query.code || null; // store authorization code
+  //req.query -> from Express, object containing a property for each query string param (i.e code=abc, return abc)
+  const code = req.query.code || null; // store authorization code
 
   axios({
     method: "post",
     url: "https://accounts.spotify.com/api/token",
-    data: querystring.stringify({ //format required body params
+    data: querystring.stringify({
+      //format required body params
       grant_type: "authorization_code",
       code: code, // authorization code
       redirect_uri: REDIRECT_URI,
@@ -94,7 +92,8 @@ app.get("/callback", (req, res) => {
   })
     //handle resolving the promise axios() returns
     .then((response) => {
-      if (response.status === 200) { //return stringified data
+      if (response.status === 200) {
+        //return stringified data
         const { access_token, refresh_token, expires_in } = response.data;
 
         const queryParams = querystring.stringify({
@@ -108,7 +107,8 @@ app.get("/callback", (req, res) => {
         res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
       }
     })
-    .catch((error) => { //do not return stringified data :(
+    .catch((error) => {
+      //do not return stringified data :(
       res.send(error);
     });
 });
