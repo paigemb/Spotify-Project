@@ -52,7 +52,7 @@ export const logout = () => {
  * @returns {boolean} Whether or not the access token in localStorage has expired
  */
 const hasTokenExpired = () => {
-  const { accessToken, timestamp, expireTime } = LOCALSTORAGE_VALUES;
+  const { accessToken, timestamp, expireTime } = LOCALSTORAGE_VALUES; //destructuring for simplicity
   if (!accessToken || !timestamp) {
     return false;
   }
@@ -145,22 +145,26 @@ const getAccessToken = () => {
 
 export const accessToken = getAccessToken();
 
+/***********************************************************************************************************/
+
+/* Axios functions */
+
 /**
  * Axios global request headers
+ * Set base url and http request headers for every http request made with axios
  * https://github.com/axios/axios#global-axios-defaults
  */
 axios.defaults.baseURL = "https://api.spotify.com/v1";
-axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`;
+axios.defaults.headers["Authorization"] = `Bearer ${accessToken}`; //access token is OAuth access token from local storage
 axios.defaults.headers["Content-Type"] = "application/json";
 
-/***********************************************************************************************************/
 
 /**
  * Get Current User's Profile
  * https://developer.spotify.com/documentation/web-api/reference/#endpoint-get-current-users-profile
  * @returns {Promise}
  */
-export const getCurrentUserProfile = () => axios.get("/me");
+export const getCurrentUserProfile = () => axios.get("/me"); //only need to include /me since using global base URL
 
 /**
  * Get a List of Current User's Playlists

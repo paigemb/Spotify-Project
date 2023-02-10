@@ -1,8 +1,11 @@
+/* Global styling */
+
 import { createGlobalStyle } from "styled-components/macro";
 import fonts from "./fonts/fonts";
 import variables from "./variables";
 
 const GlobalStyle = createGlobalStyle`
+//css variables
 ${fonts};  
 ${variables};
 

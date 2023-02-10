@@ -26,7 +26,7 @@ const Profile = () => {
   const [newAlbums, setNewAlbums] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = async () => { //using async / await since functions return promise
       const userProfile = await getCurrentUserProfile();
       setProfile(userProfile.data);
       setProfileID(userProfile.data.id);
@@ -44,7 +44,7 @@ const Profile = () => {
       setNewAlbums(userNewAlbums.data);
     };
 
-    catchErrors(fetchData());
+    catchErrors(fetchData()); //use helper function to wrap in try/catch
   }, []);
 
   return (

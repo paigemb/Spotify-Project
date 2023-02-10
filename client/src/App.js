@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
-import { accessToken, logout, getCurrentUserProfile } from "./spotify";
-import { catchErrors } from "./utils";
+import { accessToken, logout } from "./spotify";
 import { GlobalStyle } from "./styles";
+import { ScrollToTop } from "./utils";
 import styled from "styled-components/macro";
 import {
   Login,
@@ -11,9 +11,11 @@ import {
   Playlists,
   Playlist,
 } from "./pages";
+
+// imports to handling page routing
 import {
   BrowserRouter as Router,
-  Switch,
+  Switch, //switch will find the first element with matching path and ignore the rest -> list more specific routes first
   Route,
   useLocation,
 } from "react-router-dom";
@@ -35,17 +37,6 @@ const StyledLogoutButton = styled.button`
     right: var(--spacing-lg);
   }
 `;
-// Scroll to top of page when changing routes
-// https://reactrouter.com/web/guides/scroll-restoration/scroll-to-top
-function ScrollToTop() {
-  const { pathname } = useLocation();
-
-  useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
-
-  return null;
-}
 
 function App() {
   //token variable for conditionally rendering the logged-in state
