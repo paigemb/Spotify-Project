@@ -21,7 +21,8 @@ Project Description:
   - Create React App (CRA): handles configuration with setting up app, run npx create-react-app directory_name
   - Concurrently: runs multiple npm commands at the same time, used to simplify project setup
   - Styled Components & Styled Components Babel plugin: CSS-in-JS library for easier UI styling. They are React components so can be passed as props!
-  -
+  - Node.js buildpack for heroku development
+    - caches npm modules for client and server, tell heroku to install and build frontend
 - https://www.newline.co/courses/build-a-spotify-connected-app
 
 How to run:
