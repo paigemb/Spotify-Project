@@ -1,5 +1,9 @@
 # Spotify-Project
 
+APP IS DEPLOYED: spotify.herokuapp.com
+ * in order to test as a spotify user your credentials have to be added into app's Spotify Developer Dashboard
+ * instructions below
+
 Project Description:
 
 - Application to allow Spotify users to log in with their account and view data such as Top Tracks/ Top Artists/ Playlists, etc
@@ -23,17 +27,63 @@ Project Description:
   - Styled Components & Styled Components Babel plugin: CSS-in-JS library for easier UI styling. They are React components so can be passed as props!
   - Node.js buildpack for heroku development
     - caches npm modules for client and server, tell heroku to install and build frontend
-- https://www.newline.co/courses/build-a-spotify-connected-app
+ - prettier: to make it prettier<3
 
-How to run:
 
-- npm start
-- When prompted, login with your Spotify credentials
 
-Dependency installation: (postinstall script in package.json)
+## Local Installation & Set Up
 
-- npm install
+1. Register a Spotify App in your [Spotify Developer Dashboard](https://developer.spotify.com/dashboard/) and add `http://localhost:8888/callback` as a Redirect URI in the app settings
 
-Prettier:
+2. Create a `.env` file at the root of the project based on `.env.example` and add your unique `CLIENT_ID` and `CLIENT_SECRET` from the Spotify dashboard
 
-- npx prettier --write .
+3. Ensure [nvm](https://github.com/nvm-sh/nvm) and [npm](https://www.npmjs.com/) are installed globally
+
+4. Install the correct version of Node
+
+    ```shell
+    nvm install
+    ```
+
+5. Install dependencies
+
+    ```shell
+    npm install
+    ```
+
+6. Run the React app on <http://localhost:3000> and the Node server on <http://localhost:8888>
+
+    ```shell
+    npm start
+    ```
+
+
+## Deploying to Heroku with Git
+
+1. Create a [Heroku](https://www.heroku.com/) app
+
+2. Add your Heroku app as a git remote
+
+    ```shell
+    heroku git:remote -a your-app-name
+    ```
+
+3. Add `http://your-app-name.herokuapp.com/callback` as a Redirect URI in your Spotify app's settings
+
+4. In your app's **Settings** tab in the Heroku dashboard, add [config vars](https://devcenter.heroku.com/articles/config-vars#using-the-heroku-dashboard).
+
+   Based on the values in your `.env` file, the `CLIENT_ID`, `CLIENT_SECRET`, `REDIRECT_URI`, and `FRONTEND_URI` key value pairs. Make sure to replace the `localhost` URLs with your heroku app's URL.
+
+   ```env
+   REDIRECT_URI: http://your-app-name.herokuapp.com/callback
+   FRONTEND_URI: http://your-app-name.herokuapp.com
+   ```
+
+5. Push to Heroku
+
+    ```shell
+    git push heroku main
+    ```
+
+******************************************************************************************
+Thanks to "Build a Spotify Connected App" newline course!
