@@ -19,6 +19,8 @@ const { restart } = require("nodemon");
 const CLIENT_ID = process.env.CLIENT_ID;
 const CLIENT_SECRET = process.env.CLIENT_SECRET;
 const REDIRECT_URI = process.env.REDIRECT_URI;
+const FRONTEND_URI = process.env.FRONTEND_URI;
+const PORT = process.env.PORT || 8888; //heroku dynos expose a dynamic port for app to bind to on PORT variable
 
 /**
  * Generates a random string containing numbers and letters
@@ -102,7 +104,7 @@ app.get("/callback", (req, res) => {
           expires_in, //number of seconds that access_token is valid
         });
         //res.redirect() Express method to send user to localhost url
-        res.redirect(`http://localhost:3000/?${queryParams}`);
+        res.redirect(`${FRONTEND_URI}/?${queryParams}`);
       } else {
         res.redirect(`/?${querystring.stringify({ error: "invalid_token" })}`);
       }
@@ -140,6 +142,6 @@ app.get("/refresh_token", (req, res) => {
 });
 
 //listen for connection
-app.listen(port, () => {
-  console.log(`Express app listening at http://localhost:${port}`);
+app.listen(PORT, () => {
+  console.log(`Express app listening at http://localhost:${PORT}`);
 });
