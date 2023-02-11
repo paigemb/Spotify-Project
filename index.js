@@ -3,10 +3,14 @@
 // allows access to secret env variables
 require("dotenv").config();
 
+const path = require("path");
+
 /* Express module */
 const express = require("express"); //import
 const app = express(); //instatiate
-const port = 8888; //listen
+
+// Priority serve any static files
+app.use(express.static(path.resolve(__dirname, "./client/build")));
 
 const axios = require("axios");
 
@@ -139,6 +143,12 @@ app.get("/refresh_token", (req, res) => {
     .catch((error) => {
       res.send(error);
     });
+});
+
+// All remaining requests return the React app, so it can handle routing
+// catch-all for express routes, if the express doesnt recognize defer to react
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
 //listen for connection
