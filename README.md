@@ -1,6 +1,6 @@
 # Spotify-Project
 
-APP IS DEPLOYED: spotify.herokuapp.com
+APP WAS DEPLOYED: spotify.herokuapp.com (took down to avoid fees lol)
  * in order to test as a spotify user your credentials have to be added into app's Spotify Developer Dashboard
  * instructions below
 
